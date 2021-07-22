@@ -1,0 +1,25 @@
+{
+  "token": "DISCORD_BOT_TOKEN",
+  "default_prefix": "za",
+  "mongoDBURL": "MONGODB_URL",
+  "mongoDBChatbot": "fill this with ur mongodb too", 
+  "everyoneMention": false,
+  "hostedBy": true,
+  "botsCanWin": false,
+  "dev": "DEVELOPER BOT ID",
+  "ytk": "YOUTUBE_KEY",
+  "clientID": "BOT_CLIENT_ID",
+  "clientSecret": "BOT_CLIENT_SECRET",
+  "QUEUE_LIMIT": 0,
+  "COLOR": "RED",
+  "embedcolor": "YELLOW",
+  "emoji": {
+        "play": "▶️",
+        "stop": "⏹️",
+        "queue": "📄",
+        "success": "☑️",
+        "repeat": "🔁",
+        "error": "❌"
+    },
+  "base_lang": "en"
+}
