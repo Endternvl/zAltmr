@@ -26,4 +26,19 @@ How to setup the code of **zAltmr?**
 ### VisualStudioCode Setup
 How to setup on visual studio code?
 
-1. 
+1. Clone the github project: `git clone https://github.com/Endternvl/zAltmr`
+2. `cd zAltmr`
+3. Install the packages that required, But first, `npm install`
+4. Then setup the `./config.json`
+5. Then let's go coding!
+
+### Website Setup
+How to setup the code on a website like [Glitch](https://glitch.com) or [Replit](https://replit.com)
+
+1. Clone the repository
+2. Then, install the packages required, But first, do `npm i`
+3. Then setup the `./config.json`
+4. Then Let's Go Coding!
+
+
+> © Copyright zAltmr
