@@ -40,5 +40,7 @@ How to setup the code on a website like [Glitch](https://glitch.com) or [Replit]
 3. Then setup the `./config.json`
 4. Then Let's Go Coding!
 
+## Got any errors?
+Join our [Discord Server](https://discord.gg/9R7hZtbnyw) and go to [this channel](https://discord.com/channels/810705096081145904/869095263061544980)
 
 > © Copyright zAltmr
