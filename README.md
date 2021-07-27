@@ -18,6 +18,14 @@ The creator / coder of zAltmr
 | bdrxzzzz | Coder |
 | Supporter | Supporter As Sure! 😀 |
 
+<h3 align='center'>Code Support</h3>
+
+<div align="center"> <a href="https://discord.gg/9R7hZtbnyw"><img src="http://invidget.switchblade.xyz/uC5bAzvmX5"/></a>
+
+<br><br>
+
+</div>
+
 ## How To Setup
 How to setup the code of **zAltmr?**
 
