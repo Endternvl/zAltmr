@@ -16,6 +16,9 @@ The creator / coder of zAltmr
 | Endternvl (Skaryet) | Full Coder, Creator |
 | AlvinGrizz / Zarc  | Coder  |
 | bdrxzzzz | Coder |
+| Recon's Server | Errors Helper |
+| 𝙁𝘾 么 Glitch Editz | Just Cool? |
+| Sintya4 | Glitch's GF LOL Also Cool Helping Me (Kinda) |
 | Supporter | Supporter As Sure! 😀 |
 
 <h3 align='center'>Code Support</h3>
