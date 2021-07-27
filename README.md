@@ -19,9 +19,9 @@ The creator / coder of zAltmr
 | Supporter | Supporter As Sure! 😀 |
 
 <h3 align='center'>Code Support</h3>
-
+</br></br>
 <a href="https://discord.gg/9R7hZtbnyw"><img src="https://invidget.switchblade.xyz/9R7hZtbnyw"/></a>
-
+<br><br>
 <br><br>
 
 </div>
