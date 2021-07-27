@@ -1,5 +1,5 @@
 # Hello! 🤖
-Hello, I'am zAltmr. A Multi=configurated Discord bot with 200+ commands.
+Hello, I'am zAltmr. A Multi-Configurated Discord bot with over 200+ commands.
 
 ## Features
 What is the features of **zAltmr?**
