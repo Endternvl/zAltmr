@@ -20,7 +20,7 @@ The creator / coder of zAltmr
 
 <h3 align='center'>Code Support</h3>
 </br></br>
-<a href="https://discord.gg/9R7hZtbnyw"><img src="https://invidget.switchblade.xyz/9R7hZtbnyw"/></a>
+<div align="center"> <a href="https://discord.gg/9R7hZtbnyw"><img src="https://invidget.switchblade.xyz/9R7hZtbnyw"/></a>
 <br><br>
 <br><br>
 
