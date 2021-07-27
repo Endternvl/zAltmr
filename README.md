@@ -35,6 +35,15 @@ How to setup on visual studio code?
 ### Website Setup
 How to setup the code on a website like [Glitch](https://glitch.com) or [Replit](https://replit.com)
 
+- There are 2 ways.
+1. Button Setup
+2. Manual Setup
+
+# Button Setup
+[![Run on Repl.it](https://repl.it/badge/github/Endternvl/zAltmr)](https://repl.it/github/Endternvl/zAltmr)
+[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/Endternvl/zAltmr)
+[![](https://img.shields.io/badge/discord.js-v12.5.3-blue.svg?logo=npm)](https://github.com/discordjs)
+
 1. Clone the repository
 2. Then, install the packages required, But first, do `npm i`
 3. Then setup the `./config.json`
