@@ -8,7 +8,9 @@ What is the features of **zAltmr?**
 - Quick setup
 - Free To Fork
 
+</br></br>
 <div align="center"> [![](https://img.shields.io/badge/discord.js-v12.5.3-blue.svg?logo=npm)](https://github.com/discordjs)
+ <br><br>
 
 ## Creators
 The creator / coder of zAltmr
