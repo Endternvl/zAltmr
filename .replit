@@ -1,2 +1,1 @@
-language = "javascript"
-run="node index.js"
+run="bash run.sh"
