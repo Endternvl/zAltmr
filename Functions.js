@@ -1,5 +1,5 @@
 const { MessageEmbed, Client } = require("discord.js");
-const { QUEUE_LIMIT, COLOR } = require("./config.js");
+const { QUEUE_LIMIT, COLOR } = require("./config.json");
 const yes = ["yes", "y", "ye", "yea", "correct"];
 const no = ["no", "n", "nah", "nope", "fuck off"];
 const { Database } = require("quickmongo");
