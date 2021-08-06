@@ -1,12 +1,14 @@
-const client = require('../index')
+const client = require('../index');
 
-client.snipe = new Map();
+
 client.on("messageDelete", async (message, channel) => {
-  client.snipe.set(message.channel.id, {
-    content: message.content,
-    author: message.author.tag,
-    image: message.attachments.first()
-      ? message.attachments.first().proxyURL
-      : null
+  let snipes = client.snipe.get(message.channel) || [];
+  
+  snipes.unshift({
+    msg: message,
+    image: message.attachments.first()?.proxyURL || null,
+    time: Date.now(),
   });
+
+  client.snipe.set(message.channel, snipes);
 });

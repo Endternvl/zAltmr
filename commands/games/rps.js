@@ -7,6 +7,7 @@ module.exports = {
   category: "Fun",
     run: async(client, message, args) => {
         const opponent = message.mentions.users.first();
+        if (message.mentions.users.first().bot) return message.reply("Bots Can't Play Games Like This!")
 if(!opponent) return sendError(`Please mention who you want to fight`, message.channel);
 const { RPS } = require('rayzdev')
 const game = new RPS({

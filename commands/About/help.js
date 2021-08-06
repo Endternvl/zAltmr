@@ -43,7 +43,7 @@ module.exports = {
                 main: "☄",
                 image: '🖼',
                 animals: '🐈',
-                swear: '🚫',
+                swear: '🤐',
                 owner: '👑',
                 ticket: '🎫',
                 purge: '💣',
@@ -53,7 +53,9 @@ module.exports = {
                 config: '⚙',
                 games: '🎮',
                 backup: '💾',
-                ranking: '⬆'
+                ranking: '⬆',
+                poster: '<:YouTubeBig:869576982348849182>',
+                anti-alt: '<:Alt:870511493756620800>',
             }
 
             readdirSync("./commands/").forEach((dir) => {
@@ -79,7 +81,7 @@ module.exports = {
                 )
                 .addFields(categories)
                 .setFooter(
-                    `Requested by ${message.author.username}`,
+                    `Total Of: ${client.commands.size} Commands`,
                     message.author.displayAvatarURL({
                         dynamic: true
                     })

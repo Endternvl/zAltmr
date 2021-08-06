@@ -12,7 +12,7 @@ module.exports = {
     if (message.mentions.users.first().bot) return message.reply("Bots Can't Play Games Like This!")
     const opponent = message.mentions.users.first();
 if (!opponent) return message.channel.send(`Please mention who you want to fight`);
-const { fight } = require('weky');
+const { fight } = require('easyfunjs');
 const battle = new fight({
     client: client,
     message: message,

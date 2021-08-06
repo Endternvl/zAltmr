@@ -17,7 +17,7 @@ module.exports = {
   let max = args[1];
   if(!max) return message.reply(`Please include a maximum number! Usage: \`${prefix}random <MIN. NUM> <MAX. NUM>\``)
   if(isNaN(min) || isNaN(max))return message.reply(`The Parameters MUST be Numbers! Usage: \`${prefix}random <MIN. NUM> <MAX. NUM>\``)
-  message.channel.send(`\`\`\`fix\n${getRandomInt(Number(min), Number(max))}\n\`\`\``)  
+  message.channel.send(`\`\`\`fix\n${getRandomInt(Number(min), Number(max))}\n\`\`\``) 
   }
 };
 function getRandomInt(min, max) {

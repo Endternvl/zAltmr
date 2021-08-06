@@ -3,12 +3,11 @@ module.exports = {
   description: 'lets go play tic tac toe!',
 
   run: async (client, message, args) => {
-    const { TicTacToe } = require('famjenotmine');
+    const { TicTacToe } = require('easyfunjs');
     const opponent = message.mentions.users.first();
     if (!opponent) return message.channel.send(`Please mention who you want to challenge at tictactoe.`);
-    if(message.mentions.members.first().bot){
-      return message.reply('You cant play with dbots!')
-    }
+    const botuser = message.mentions.users.first().bot;
+    if(botuser) return message.reply('You cant play with bots!')
     const game = new TicTacToe({
     message: message,
     opponent: opponent, //opponent

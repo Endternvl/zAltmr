@@ -1,7 +1,9 @@
 const Discord = require("discord.js");
 const canvacord = require("canvacord");
 const toHex = require("colornames");
-const db = require("quick.db");
+const { mongoDBURL } = require('../../config.json');
+const { Database } = require("quickmongo");
+const db = new Database(mongoDBURL);
 let Levels = require("discord-xp");
 
 module.exports = {

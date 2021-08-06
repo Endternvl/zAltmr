@@ -39,17 +39,20 @@ const canvacord = require("canvacord");
           "IMAGE",image||
           "https://cdn.discordapp.com/attachments/811143476522909718/848760536362778634/zAltmrWelcome.png"
         );
+        const clmessage = client.data.get(`levelmsg_${message.guild.id}`);
       ran.build().then(data => {
         const attachment = new Discord.MessageAttachment(data, "Rankcard.png");
         const EmbedLevel = new Discord.MessageEmbed()
           .setColor("RANDOM")
-          .setTitle(message.guild.iconURL() + 'Level Up Logs')
+          .setAuthor(message.guild.iconURL() + 'Level Up Logs')
           .setTimestamp()
           .setDescription(
-            `Congratulations, ${user.username}`
+            `Congratulations, ${user.username}! You just leveled up!\n
+            **Information**\n
+            User: ${user.username}\n
+            Level: ${User.level}\n
+            XP: ${User.xp}/${neededXp}`
           )
-          .addField('Leveled Up To', `\`${User.level}\``)
-          .addField('XP Up From', `\`${User.xp}/${neededXp}\``)
           .setImage("attachment://Rankcard.png")
           .attachFiles(attachment);
 

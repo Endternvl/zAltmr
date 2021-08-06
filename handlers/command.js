@@ -45,5 +45,5 @@ module.exports = (client) => {
         continue;
       }
     }
-  })
+  });
 }
