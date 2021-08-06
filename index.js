@@ -1,6 +1,6 @@
 
 console.log('-------- Loading Packages --------');
-const discord = require("discord.js");
+const discord = require('discord.js');
 const client = new discord.Client({
     disableMention: 'everyone',
     shards: 'auto',
@@ -25,16 +25,11 @@ const client = new discord.Client({
 });
 let Translator = require("./translator.js");
 Translator = new Translator();
-const { token, default_prefix, base_lang, mongoDBURL } = require("./config.json");
-const fs = require('fs')
-const config = require('./config.json')
-const Spotify = require("erela.js-spotify");
+const { token, default_prefix, mongoDBURL } = require("./config.json");
+require('discord-reply')
 const { version } = require('./package.json');
 const { version: discordjsVersion } = require('discord.js');
-const clientID = config.clientID;
-const clientSecret = config.clientSecret;
 const { CanvasSenpai } = require('canvas-senpai')
-const canva = new CanvasSenpai();
 const { MessageButton, MessageActionRow } = require('discord-buttons')
 const disbut = require('discord-buttons')
 disbut(client)
@@ -46,18 +41,13 @@ mongoose.connect(mongoDBURL, {
   useUnifiedTopology: true,
   useNewUrlParser: true
 }).then(console.log('--- M O N G O  C O N N E C T E D ---'));
-const { Database } = require('quickmongo')
-const db2 = new Database(mongoDBURL)
-const yts = require('yt-search');
-const DisTube = require('distube');
-const premiumSchema = require('./mongodels/premium');
+const { Database } = require('quickmongo');
+const YoutubePoster = require("discord-yt-poster");
 const premiumGuildSchema = require('./mongodels/premium-guild');
 const sendError = require('./mores/error');
 const { MessageEmbed } = require('discord.js');
 const ms = require('ms');
-const sendDone = require('./mores/success');
 module.exports = client;
-const Guild = require("./models/log");
 let {
   awaitReply,
   resolveUser,
@@ -68,11 +58,8 @@ let {
   randomNumber,
   formating, emoji,
   translate
-} = require("./Functions.js"); //Files
-console.log('--- Packages and events loaded successfully ---')
-
-
-
+} = require("./Functions");
+console.log('--- Packages and events loaded successfully ---');
 //---------Making Collections---------\\
 console.log('--- LOADING COLLECTIONS ---');
 client.count = emo;
@@ -86,10 +73,6 @@ client.translate = translate;
 client.commands = new discord.Collection();
 client.slashCommands = new discord.Collection();
 client.aliases = new discord.Collection();
-client.slcommands = new discord.Collection();
-//--music--\\
-client.distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true, leaveOnFinish: true, leaveOnEmpty: true })
-//--continue the collections--\\
 client.db = require('quick.db')
 const cooldowns = new discord.Collection();
 client.queue = new Map();
@@ -102,21 +85,9 @@ client.emotes = require('./emotes.json');
 client.filters = require('./filters.json');
 client.token = require('./config.json').token;
 client.config = require('./config.json');
-client.snipes = new Map();
-
-client.shop = {
-  laptop: {
-    cost: 2000
-  },
-  mobile: {
-    cost: 1000
-  },
-  pc: {
-    cost: 3000
-  }
-};
+client.snipe = new discord.Collection();
+client.YTP = new YoutubePoster(client);
 //---end of collections---\\
-
 ["command"].forEach(handler => {
   require(`./handlers/${handler}`)(client);
 });
@@ -187,6 +158,7 @@ client.on("message", async message => {
             "No Usage Actually"}\n\`\`\`Description:\`\`\`html\n${command.description ||
             "No Description"}\n\`\`\``
           )
+	  .setFooter(`© zAltmr`)
       );
     }
     if (command.bot) {
@@ -206,6 +178,7 @@ client.on("message", async message => {
                 ", "
               )}** permission(s) to execute the command!`
             )
+	    .setFooter(`© zAltmr`)
         );
     }
 
@@ -219,6 +192,7 @@ client.on("message", async message => {
             .setDescription(
               `You do not have permission to use this command.\nThis command requires \`${command.author}\``
             )
+	    .setFooter(`© zAltmr`)
         );
       }
     }
@@ -239,6 +213,7 @@ client.on("message", async message => {
                 ", "
               )}** permission(s) to execute the command!`
             )
+	    .setFooter(`© zAltmr`)
         );
     }
 
@@ -256,7 +231,7 @@ client.on("message", async message => {
               `You do not have permission to use this command.\nThis command requires \`${command.permissions.join(
                 ", "
               ) || "ADMINISTRATOR"}\``
-            )
+            ).setFooter(`© zAltmr`)
         );
       }
     }
@@ -305,6 +280,7 @@ client.on("message", async message => {
                 timeLeft
               )}**`
             )
+            .setFooter(`© zAltmr`)
         );
       }
     }
@@ -322,27 +298,43 @@ client.on("message", async message => {
           `**YUCK!** Something went wrong executing that command\nError Message: \`${
           error.message ? error.message : error
           }\``
-        );
+        )
+	.setFooter(`© zAltmr`);
       return message.channel
         .send(errrr)
-        .then(m => m.delete({ timeout: 13000 }).catch(e => { }));
+        .then(m => m.delete({ timeout: 13000 }).catch(() => { }));
     }
   }
 });
 
-//--end
-client.on("messageDelete", function(message, channel) {
-  client.snipes.set(message.channel.id, {
-    content: message.content,
-    author: message.author.tag,
-    image: message.attachments.first()
-      ? message.attachments.first().proxyURL
-      : null
-  });
+//---------Anti-Alt---------\\
+const alt = require("discord-anti-alt")
+client.on('guildMemberAdd', async member => {
+    const altdays = db.get(`altdays.${member.guild.id}`)
+    const altchannel = db.get(`antialt.${member.guild.id}`)
+    if(!altdays || !altchannel)return;
+
+
+
+    const account = new alt.config({
+        days:parseInt(altdays),
+        options:'kick'
+    })
+
+    let running = account.run(member);
+    let profile = alt.profile(member);
+    if(running) {
+        const embed = new Discord.MessageEmbed()
+        .setAuthor(member.user.tag,member.user.displayAvatarURL({ dynamic: true }))
+        .setColor("RANDOM")
+        .addField("Account's Age: ",profile.userAge,true)
+        .addField("Minimum Age required: ",altdays,true)
+        .addField("Account was created at: ",profile.date.userDateCreated,true)
+	.setFooter('Alt Check System')
+        return member.guild.channels.cache.get(altchannel).send(embed)
+    }
 });
-
-
-//---------when bot joined to a current server---------\\
+//---------when bot joined to a server---------\\
 client.on("guildCreate", guild => {
   guild.fetchAuditLogs({ type: "BOT_ADD", limit: 1 }).then(log => {
     const inviter = log.entries.first().executor;
@@ -354,52 +346,9 @@ client.on("guildCreate", guild => {
       .setImage('https://cdn.discordapp.com/attachments/811143476522909718/861430392158552094/standard_6.gif')
       .setTimestamp();
 
-    chx.send(thankEmbed).catch(e => undefined);
+    chx.send(thankEmbed).catch(() => undefined);
   });
 });
-
-//--dms chatbot
-//ended
-//--end
-
-//---------DISCORD INVITE LINK BUTTON---------\\
-client.on('clickButton', async (button) => {
-  if (button.id === 'inviteyes') {
-
-    const inviteyb = new discord.MessageEmbed()
-      .setTitle("Thanks!")
-      .setDescription(`Here Is My Invite Links: \nServer Moderator: **[\`Click Me\`](https://discord.com/oauth2/authorize?client_id=${clientID}&scope=bot&permissions=2147483647)**
-    Server Helper: **[\`Click Me\`](https://discord.com/oauth2/authorize?client_id=${clientID}&scope=bot&permissions=4294967287)** \n Recommended: **[\`Click Me\`](https://discord.com/oauth2/authorize?client_id=${clientID}&scope=bot&permissions=8589934591)**`)
-      .setColor("GREEN");
-
-    const joindsc = new MessageButton()
-      .setStyle('url')
-      .setLabel('Join Our Support Server!')
-      .setURL('https://discord.gg/9R7hZtbnyw');
-
-    const awza = new MessageActionRow()
-      .addComponent(joindsc);
-
-    button.message.edit({ component: awza, embed: inviteyb })
-  }
-  if (button.id === 'inviteno') {
-    const noooyb = new MessageEmbed()
-      .setTitle('Okay Then')
-      .setDescription('But Please Join Our Support Server! (If you wanted to)')
-      .setColor("RED");
-
-    const joindsc = new MessageButton()
-      .setStyle('url')
-      .setLabel('Join Our Support Server!')
-      .setURL('https://discord.gg/9R7hZtbnyw');
-
-    const awza = new MessageActionRow()
-      .addComponent(joindsc)
-
-    button.message.edit({ components: joindsc, embed: noooyb })
-  }
-});
-
 
 client.giveawaysManager = new GiveawaysManager(client, {
   updateCountdownEvery: 3000,
@@ -409,11 +358,9 @@ client.giveawaysManager = new GiveawaysManager(client, {
     reaction: "🎉"
   }
 });
-
-//---boom
 client.giveawaysManager.on(
   "giveawayReactionAdded",
-  async (giveaway, reactor, messageReaction, server) => {
+  async (giveaway, reactor, messageReaction) => {
     if (reactor.user.bot) return;
     try {
       if (giveaway.extraData) {
@@ -445,7 +392,6 @@ client.giveawaysManager.on(
     }
   }
 );
-// Check if user reacts on an ended giveaway
 client.giveawaysManager.on('endedGiveawayReactionAdded', (giveaway, member, reaction) => {
   reaction.users.remove(member.user);
   member.send(new discord.MessageEmbed()
@@ -455,7 +401,6 @@ client.giveawaysManager.on('endedGiveawayReactionAdded', (giveaway, member, reac
     .setTimestamp())
 
 });
-// Dm our winners
 client.giveawaysManager.on('giveawayEnded', (giveaway, winners) => {
   winners.forEach((member) => {
     member.send(new discord.MessageEmbed()
@@ -467,7 +412,6 @@ client.giveawaysManager.on('giveawayEnded', (giveaway, winners) => {
     );
   });
 });
-// Dm Rerolled winners
 client.giveawaysManager.on('giveawayRerolled', (giveaway, winners) => {
   winners.forEach((member) => {
     member.send(new discord.MessageEmbed()
@@ -482,7 +426,6 @@ client.giveawaysManager.on('giveawayRerolled', (giveaway, winners) => {
 
 //---end---\\
 
-//--alt chec
 //---nqn
 client.on("message", async (message) => {
   if (message.author.bot) return;
@@ -515,8 +458,8 @@ client.on("message", async (message) => {
     avatar: message.author.displayAvatarURL({ dynamic: true })
   })
 
-  message.delete().catch(err => { })
-  webhook.send(msg).catch(err => { })
+  message.delete().catch(() => { })
+  webhook.send(msg).catch(() => { })
 
   await webhook.edit({
     name: `zAltmr` + number,
@@ -525,40 +468,16 @@ client.on("message", async (message) => {
 
 
 });
-
-
-
-
-//---end
-
-//---welcome
-
-//---end
-
-
-
-//---end of events
-//--nuggies--\\
-
 client.on('clickButton', button => {
     Nuggies.buttonroles.buttonclick(client, button);
 });
 
-client.on("message", async (message) => {
-  if (message.author.bot) {
-
-    const savedData = JSON.parse(fs.readFileSync("./storage/database.json", "utf8"))
-    if (!savedData[message.author.id]) return;
-    const translation = await Translator.autoTranslate(message, { from: savedData[message.author.id], to: base_lang });
-    if (translation) return message.channel.send(translation)
-  }
-})
 
 
 
 client.on("ready", () => {
-  client.user.setStatus("online"); // You Can Set It To dnd, online, idle. dont set it to offline plz
-  console.log(`${client.user.username} was turned on || Join TimesCord Community For Early Updates || https://discord.gg/AyjQjmUvE4`)
+  client.user.setStatus("online");
+  console.log(`Need some help? https://discord.gg/9R7hZtbnyw`)
 });
 
 //---------Here To Set The Activity Status---------\\
@@ -571,13 +490,10 @@ client.on("ready", async () => {
     `${default_prefix}help | ${client.user.username}`,
   ]
   setInterval(() => {
-    client.user.setActivity(status[Math.floor(Math.random() * status.length)], { type: "PLAYING" }) //You Can Set The Type To PLAYING/WATCHING/COMPETING/LISTENING.
+    client.user.setActivity(status[Math.floor(Math.random() * status.length)], { type: "PLAYING" })
   }, 3000)
 });
 //---------End--------\\
-
-//Token Is Required.
-
-client.login(token).catch(err => {
+client.login(token).catch(() => {
   console.log("--- Invalid Token Or You're Not Putting The Token In Your Config.json ---")
 });
