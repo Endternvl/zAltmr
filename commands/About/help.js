@@ -55,7 +55,7 @@ module.exports = {
                 backup: '💾',
                 ranking: '⬆',
                 poster: '<:YouTubeBig:869576982348849182>',
-                anti-alt: '<:Alt:870511493756620800>',
+                antialt: '<:Alt:870511493756620800>',
             }
 
             readdirSync("./commands/").forEach((dir) => {
