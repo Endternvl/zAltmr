@@ -44,7 +44,46 @@ Upgrading Node.js To A Better Version.
 Just go to the official [Node.js](https://nodejs.org) then download and execute the program u downloaded. It will take care of everything and with a few clicks of 'Next' you'll get the latest Node.js version running on your machine.
 
 ## Replit Setup
-Are you wondering, "Why" do i add this setup...? It's all because of i saw replit nerds / users are getting nodejs+ version error and they really dont know how to fix. so replit's javascript language node.js version is 14-. so all you have to do is just change the language to bash and it will works finely. and with i add some scripts, it will downloads nodejs v14, but sorry, longer startup
+Alright so hey, repl.it is not supporting nodejs v16+ so i had to add this setup! this is going to be helpful!
+
+1. Execute this command on shell (**SHELL NOT CONSOLE OKAY**)
+```bash
+npm i --save-dev node@16 && npm config set prefix=$(pwd)/node_modules/node && export PATH=$(pwd)/node_modules/node/bin:$PATH
+ And execute this to clean npm cache and reinstall the package.
+rm -rf node_modules && rm package-lock.json && npm cache clear --force && npm cache clean --force && npm i
+```
+
+2. Create the .replit to execute node from the shell instead of the console.
+`run="npm start"`
+
+3. Make sure to add the start script in your package.json file
+```json
+  "scripts": {
+    "start": "node ."
+  }
+  ```
+
+You can also add all of it, in your package.json 
+```bash
+"scripts": {
+  "start": "node .",
+  "node-update": "npm i --save-dev node@16 && npm config set prefix=$(pwd)/node_modules/node && export PATH=$(pwd)/node_modules/node/bin:$PATH",
+  "node-clean": "rm -rf node_modules && rm package-lock.json && npm cache clear --force && npm cache clean --force && npm i",
+  "node-update-then-clean": "npm run node-update && npm run node-clean-cache"
+}
+```
+
+`npm run node-update-then-clean` to update-and-clean
+
+4. (Optional) If you had packages like canvas or sqlite before, you need to re-install those packages
+`npm uninstall canvas && npm i canvas`
+
+*Note From Skaryet*
+If it still logs 'Node.js v14', use node.js language, then do the setup up there, then dont mind about the v12 version log. its now on v16 dont worry
+also this only works on nodejs language not in bash so, if you're wondering why its not working on bash (never tried i guess not working lol) bc its workis perfectly on node language.
+also if it still logs like 'nodejs v12' or under, and u have done the setup perfectly the same, dont worry! it's now v16! so you will not get this `cannot find module 'discord.js'` error.
+
+**DiscordJS v13 required node v16 or newer**
 
 ### VisualStudioCode Setup
 How to setup on visual studio code?
