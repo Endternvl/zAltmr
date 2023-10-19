@@ -1,3 +1,5 @@
+# Might be outdated as it's using discord.JS version 12
+
 # Hello! 🤖
 Hello, I'am zAltmr. A Multi-Configurated Discord bot with over 200+ commands.
 
@@ -49,10 +51,11 @@ Alright so hey, repl.it is not supporting nodejs v16+ so i had to add this setup
 1. Execute this command on shell (**SHELL NOT CONSOLE OKAY**)
 ```bash
 npm i --save-dev node@16 && npm config set prefix=$(pwd)/node_modules/node && export PATH=$(pwd)/node_modules/node/bin:$PATH
- And execute this to clean npm cache and reinstall the package.
+```
+And then run this to clean npm cache and reinstall the package
+```bash
 rm -rf node_modules && rm package-lock.json && npm cache clear --force && npm cache clean --force && npm i
 ```
-
 2. Create the .replit to execute node from the shell instead of the console.
 `run="npm start"`
 
